@@ -1,0 +1,19 @@
+{
+  "name": "paro",
+  "version": "1.0.0",
+  "description": "",
+  "private":true,
+  "workspaces": [
+	  "apps/*",
+	  "services/*",
+	  "packages/*",
+	  "gateway"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Subhranandan Deka",
+  "license": "ISC",
+  "type": "module"
+}
