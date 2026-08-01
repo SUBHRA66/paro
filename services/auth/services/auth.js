@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import bcrypt from 'bcryptjs';
+import UserService from '../../user/services/user.js';
 
 const generateToken = (id) => {
   const secret = process.env.JWT_SECRET || 'supersecret_jwt_key_paro_2026';
@@ -9,17 +10,20 @@ const generateToken = (id) => {
 
 class AuthService {
   static async signup({ name, email, password, role }) {
-    const existingUser = await User.findOne({ email });
+    const existingUser = await UserService.findUserByEmail(email);
     if (existingUser) {
       const error = new Error('User with this email already exists');
       error.statusCode = 400;
       throw error;
     }
 
-    const user = await User.create({
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const user = await UserService.createUser({
       name,
       email,
-      password,
+      password: hashedPassword,
       role: role || 'user',
     });
 
@@ -37,14 +41,15 @@ class AuthService {
   }
 
   static async login({ email, password }) {
-    const user = await User.findOne({ email }).select('+password');
+    const user = await UserService.findUserByEmail(email, true);
     if (!user) {
       const error = new Error('Invalid credentials');
       error.statusCode = 401;
       throw error;
     }
 
-    const isMatch = await user.matchPassword(password);
+    // Password Verification Logic
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       const error = new Error('Invalid credentials');
       error.statusCode = 401;
@@ -65,7 +70,6 @@ class AuthService {
   }
 
   static async getMe(user) {
-
     return {
       id: user._id,
       name: user.name,

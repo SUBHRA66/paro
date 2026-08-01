@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import UserService from '../../user/services/user.js';
 
 class AuthMiddleware {
   static async ensureAuthenticated(req, res, next) {
@@ -15,7 +15,7 @@ class AuthMiddleware {
     if (!token) {
       return res.status(401).json({
         success: false,
-        message: "Unauthorized",
+        message: 'Unauthorized',
       });
     }
 
@@ -23,7 +23,7 @@ class AuthMiddleware {
       const jwtSecret = process.env.JWT_SECRET || 'supersecret_jwt_key_paro_2026';
       const decoded = jwt.verify(token, jwtSecret);
 
-      const user = await User.findById(decoded.id);
+      const user = await UserService.findUserById(decoded.id);
 
       if (!user) {
         return res.status(401).json({
@@ -37,12 +37,11 @@ class AuthMiddleware {
     } catch (error) {
       return res.status(401).json({
         success: false,
-        message: "Unauthorized",
+        message: 'Unauthorized',
         error: error.message,
       });
     }
-  };
+  }
 }
-
 
 export default AuthMiddleware;

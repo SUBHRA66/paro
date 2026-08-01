@@ -2,7 +2,7 @@ import 'dotenv/config';
 import app from './app.js';
 import connectDB from './config/db.js';
 
-const PORT = process.env.AUTH_PORT || 7001;
+const PORT = process.env.AUTH_PORT || 3001;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/paro_auth';
 
 connectDB(MONGO_URI)

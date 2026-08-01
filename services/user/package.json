@@ -1,0 +1,24 @@
+{
+  "name": "@paro/user-service",
+  "version": "1.0.0",
+  "description": "user service",
+  "license": "ISC",
+  "author": "Subhranandan Deka",
+  "type": "module",
+  "main": "server.js",
+  "exports": {
+    "./services/user.js": "./services/user.js",
+    "./models/User.js": "./models/User.js"
+  },
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.9.1"
+  }
+}
