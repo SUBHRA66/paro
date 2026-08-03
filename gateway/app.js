@@ -1,16 +1,17 @@
 import express from 'express';
 import cors from 'cors';
 
-import apiRouter from './routes/api.routes.js';
+import registerProxy from './proxy/registerProxy.js';
 
 const app = express();
 
+app.use ('/speed', (req, res) => {
+	res.status (200).json({
+		message: "virat kohli",
+		status : "OK",
+	})
+})
 
-app.use (cors());
-app.use (express.json());
-app.use (express.urlencoded({ extended: true }));
-
-app.use ('/api', apiRouter);
-
+registerProxy (app);
 
 export default app;

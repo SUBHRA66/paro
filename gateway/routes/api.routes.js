@@ -1,3 +1,4 @@
+/*
 import { Router } from 'express';
 
 import authProxy from '../proxy/auth.proxy.js';
@@ -15,3 +16,4 @@ router.get('/health', (req, res) => {
 router.use("/auth", authProxy);
 
 export default router;
+*/

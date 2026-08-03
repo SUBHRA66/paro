@@ -1,4 +1,5 @@
 import 'dotenv/config';
+
 import app from './app.js';
 
 const PORT = process.env.GATEWAY_PORT || 7777;
