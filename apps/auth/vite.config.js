@@ -5,7 +5,7 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: "/auth"
+  base: "/auth",
   build: {
 	  outDir: "../../static/auth",
 	  emptyOutDir: true,

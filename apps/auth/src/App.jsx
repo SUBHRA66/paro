@@ -3,7 +3,7 @@ import LoginForm from './components/LoginForm.jsx';
 import SignupForm from './components/SignupForm.jsx';
 import UserProfile from './components/UserProfile.jsx';
 
-const API_BASE_URL = 'http://localhost:7001';
+const API_BASE_URL = 'http://localhost:7777';
 
 function App() {
   const [activeTab, setActiveTab] = useState('login');

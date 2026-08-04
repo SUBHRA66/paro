@@ -9,6 +9,7 @@ node_modules/
 *.env
 
 # Build & Output directories
+/static/
 dist/
 build/
 out/

@@ -1,9 +1,9 @@
 import { createProxyMiddleware } from 'http-proxy-middleware';
-import services from '../config/services.js';
+import servicesConfig from '../config/service.config.js';
 
 
 function registerProxy (express_app) {
-	for (const [prefix, target] of Object.entries(services)) {
+	for (const [prefix, target] of Object.entries(servicesConfig)) {
 		console.log("prefix\t", prefix)
 		console.log("target\t", target)
 		express_app.use(
