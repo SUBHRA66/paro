@@ -4,20 +4,18 @@ import AuthMiddleware from '../middleware/authMiddleware.js';
 
 const router = Router();
 
-router.get ('/speed', (req,res) => {
-	res.json ({
-		message: "Whyrat Kohli", 
-		status : "OK",
-		service: "auth",
-	})
+router.get('/health', (req, res) => {
+	res.status(200).json({
+		service: 'auth',
+		status: 'ok',
+		timestamp: new Date().toISOString(),
+	});
 });
 
-router.post ('/signup', AuthController.signup);
+router.post('/login', AuthController.login);
 
-router.post ('/login', AuthController.login);
+router.post('/signup', AuthController.signup);
 
-router.get ('/me', AuthMiddleware.ensureAuthenticated, AuthController.getMe);
-
-router.post ('/logout', AuthMiddleware.ensureAuthenticated, AuthController.logout);
+router.post('/logout', AuthMiddleware.ensureAuthenticated, AuthController.logout);
 
 export default router;

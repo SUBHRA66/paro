@@ -4,11 +4,10 @@ class UserService {
   /**
    * Create a new user in database
    */
-  static async createUser({ name, email, password, role }) {
+  static async createUser({ name, email, role }) {
     const user = await User.create({
       name,
       email,
-      password,
       role: role || 'user',
     });
     return user;
@@ -17,30 +16,22 @@ class UserService {
   /**
    * Find user by email
    */
-  static async findUserByEmail(email, includePassword = false) {
-    const query = User.findOne({ email });
-    if (includePassword) {
-      query.select('+password');
-    }
-    return await query;
+  static async findUserByEmail(email) {
+    return await User.findOne({ email });
   }
 
   /**
    * Find user by ID
    */
-  static async findUserById(id, includePassword = false) {
-    const query = User.findById(id);
-    if (includePassword) {
-      query.select('+password');
-    }
-    return await query;
+  static async findUserById(id) {
+    return await User.findById(id);
   }
 
   /**
    * Fetch all users
    */
   static async getAllUsers() {
-    return await User.find().select('-password');
+    return await User.find();
   }
 
   /**
@@ -50,7 +41,7 @@ class UserService {
     const user = await User.findByIdAndUpdate(id, updateData, {
       new: true,
       runValidators: true,
-    }).select('-password');
+    });
 
     if (!user) {
       const error = new Error(`User not found with id ${id}`);

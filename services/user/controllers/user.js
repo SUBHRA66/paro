@@ -1,21 +1,17 @@
 import UserService from '../services/user.js';
 
 class UserController {
-  /**
-   * @desc Create a new user
-   * @route POST /user
-   */
   static async createUser(req, res, next) {
     try {
-      const { name, email, password, role } = req.body;
-      if (!name || !email || !password) {
+      const { name, email, role } = req.body;
+      if (!name || !email) {
         return res.status(400).json({
           success: false,
-          message: 'Please provide name, email, and password',
+          message: 'Please provide name and email',
         });
       }
 
-      const user = await UserService.createUser({ name, email, password, role });
+      const user = await UserService.createUser({ name, email, role });
       return res.status(201).json({
         success: true,
         message: 'User created successfully',
@@ -26,10 +22,6 @@ class UserController {
     }
   }
 
-  /**
-   * @desc Get all users
-   * @route GET /user
-   */
   static async getAllUsers(req, res, next) {
     try {
       const users = await UserService.getAllUsers();
@@ -43,10 +35,6 @@ class UserController {
     }
   }
 
-  /**
-   * @desc Get single user by ID
-   * @route GET /user/:id
-   */
   static async getUserById(req, res, next) {
     try {
       const user = await UserService.findUserById(req.params.id);
@@ -65,10 +53,6 @@ class UserController {
     }
   }
 
-  /**
-   * @desc Update user by ID
-   * @route PUT /user/:id
-   */
   static async updateUser(req, res, next) {
     try {
       const user = await UserService.updateUser(req.params.id, req.body);
@@ -82,10 +66,6 @@ class UserController {
     }
   }
 
-  /**
-   * @desc Delete user by ID
-   * @route DELETE /user/:id
-   */
   static async deleteUser(req, res, next) {
     try {
       await UserService.deleteUser(req.params.id);

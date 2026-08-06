@@ -19,12 +19,6 @@ const userSchema = new mongoose.Schema(
         'Please provide a valid email address',
       ],
     },
-    password: {
-      type: String,
-      required: [true, 'Please provide a password'],
-      minlength: [6, 'Password must be at least 6 characters long'],
-      select: false,
-    },
     role: {
       type: String,
       enum: ['user', 'admin'],

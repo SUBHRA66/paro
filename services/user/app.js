@@ -9,15 +9,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/user', userRouter);
-
-app.get('/health', (req, res) => {
-  res.status(200).json({
-    service: 'user',
-    status: 'ok',
-    timestamp: new Date().toISOString(),
-  });
-});
+//app.use(AuthMiddleware.ensureAuthenticated);
+app.use(userRouter);
 
 app.use(errorHandler);
 
