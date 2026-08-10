@@ -1,11 +1,11 @@
 info() {
-	echo "$[INFO] $1"
+	echo "[INFO] $1"
 }
 
 success() {
-	echo "$[SUCCESS] $1"
+	echo "[SUCCESS] $1"
 }
 
 error() {
-	echo "$[ERROR] $1"
+	echo "[ERROR] $1"
 }

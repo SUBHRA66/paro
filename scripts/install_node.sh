@@ -26,14 +26,14 @@ install_node(){
 			return
 		fi
 	
-		info "Node.js $(node -v) detected. Switching to v$(required_version)..."
+		info "Node.js $(node -v) detected. Switching to v${required_version}..."
 	fi
 	
 	nvm install "$required_version"
 	
 	nvm alias default "$required_version"
 	
-	nvm use "$required_major"
+	nvm use "$required_version"
 	
 	success "Node version $(node -v) installed...."	
 }
