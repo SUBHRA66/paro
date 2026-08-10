@@ -6,7 +6,7 @@ const router = Router();
 
 router.get('/health', (req, res) => {
 	res.status(200).json({
-		service: 'auth',
+		service: 'auth service',
 		status: 'ok',
 		timestamp: new Date().toISOString(),
 	});

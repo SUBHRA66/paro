@@ -8,7 +8,7 @@ const app = express();
 
 app.use ('/speed', (req, res) => {
 	res.status (200).json({
-		message: "virat kohli",
+		message: "Gateway application up",
 		status : "OK",
 	})
 })
